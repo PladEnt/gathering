@@ -1,0 +1,8 @@
+<p><%= @comint.content %>
+
+<form method="post" action="/comints/<%=@comint.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete comint">
+</form>
+
+<a href="/comints/<%=@comint.id%>/edit">Edit Comint </a>

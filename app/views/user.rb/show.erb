@@ -1,0 +1,6 @@
+<p> Here are your comints, <%= @user.username %>
+<% @user.comints.each do |comint| %>
+  <div>
+    <%= comint.content %>
+  </div>
+<% end %>
