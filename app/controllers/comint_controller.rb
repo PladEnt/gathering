@@ -55,7 +55,7 @@ class ComintsController < ApplicationController
       end
     end
   
-    patch '/twcomintseets/:id' do
+    patch '/comint/:id' do
       if logged_in?
         if params[:content] == ""
           redirect to "/comints/#{params[:id]}/edit"
