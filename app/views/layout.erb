@@ -15,9 +15,13 @@
         <p>Welcome, <%=current_user.username %></p>
 
       <% else %>
-        <a href="/signup">Sign Up</a>
+        <form method="post" action="/signup">
+          <input type="submit" value="Signup">
+        </form>
         <p></p>
-        <a href="/login"> Sign In </a>
+        <form method="post" action="/login">
+          <input type="submit" value="Login">
+        </form>
       <%end %>
     </div>
 
