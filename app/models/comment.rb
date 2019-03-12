@@ -1,3 +1,5 @@
-class Comment < ActiveRecord::Base
+class Comments < ActiveRecord::Base
     belongs_to :user
+
+    
 end

@@ -19,8 +19,6 @@ class UsersController < ApplicationController
         @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
         @user.save
         session[:user_id] = @user.id
-        binding.pry
-
         redirect to '/comments'
       end
     end

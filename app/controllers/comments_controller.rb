@@ -1,8 +1,7 @@
 class CommentsController < ApplicationController
     get '/comments' do
-      binding.pry
       if logged_in?
-        @comments = comments.all
+        @comments = Comments.all
         erb :'comments/comments'
       else
         redirect to '/login'

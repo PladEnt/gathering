@@ -1,6 +1,6 @@
 class commentTable < ActiveRecord::Migration
     def change
-      create_table :tweets do |t|
+      create_table :comments do |t|
         t.text :content
         t.integer :user_id
   
