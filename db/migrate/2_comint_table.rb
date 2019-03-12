@@ -1,4 +1,4 @@
-class ComintTable < ActiveRecord::Migration
+class commentTable < ActiveRecord::Migration
     def change
       create_table :tweets do |t|
         t.text :content

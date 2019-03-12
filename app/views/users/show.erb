@@ -1,0 +1,6 @@
+<p> Here are your comments, <%= @user.username %>
+<% @user.comments.each do |comment| %>
+  <div>
+    <%= comment.content %>
+  </div>
+<% end %>
