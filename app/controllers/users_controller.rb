@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   
     get '/login' do 
       if !logged_in?
-        erb :'users/login'
+        erb :'/users/login'
       else
         redirect '/comments'
       end
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
         session[:user_id] = user.id
         redirect "/comments"
       else
-        redirect to '/signup'
+        redirect to '/login'
       end
     end
   

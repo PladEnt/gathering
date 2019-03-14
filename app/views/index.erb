@@ -1,16 +1,8 @@
 <h1>Welcome to Gathering!</h1>
-<% if logged_in? %>
-  
-  <a href="/comments/new"> Create comment </a>
-  <a href="/logout"> Log Out </a>
-  <p>Welcome, <%=current_user.username %></p>
-
-<% else %>
-  <form method="get" action="/signup">
-    <input type="submit" value="Signup">
-  </form>
-  <p></p>
-  <form method="get" action="/login">
-    <input type="submit" value="Login">
-  </form>
-<%end %>
+<form method="get" action="/signup">
+  <input type="submit" value="Signup">
+</form>
+<p></p>
+<form method="get" action="/login">
+  <input type="submit" value="Login">
+</form>

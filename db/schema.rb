@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 2) do
 
-  create_table "tweets", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
     t.datetime "created_at", null: false

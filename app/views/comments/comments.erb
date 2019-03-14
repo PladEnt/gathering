@@ -1,10 +1,25 @@
 <p> Welcome <%= current_user.username %>
-<h2> comment </h2>
-
-<% binding.pry %>
+<h2> comments </h2>
+<p>=====================</p>
 
 <% @comments.each do |comment| %>
   <div>
-    <%= comment.content %>
+    <% if comment.content != nil %>
+      <p></p>
+      <p> From: <%= comment.user.username %> </p>
+      <%= comment.content %>
+      <p>---------------</p>
+      <% if comment && comment.user == current_user %>
+        <form method="post" action="/comments/<%=comment.id%>/delete">
+          <input id="hidden" type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Delete comment">
+        </form>
+      <% end %>
+    <% end %>
   </div>
 <% end %>
+
+<p>=====================</p>
+<a href="/comments/new">
+  <button>Leave a comment</button>
+</a>
