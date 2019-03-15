@@ -1,23 +1,28 @@
-<p> Welcome <%= current_user.username %>
-<h2> comments </h2>
+<h3>Loged in as: <%= current_user.username %></h3>
+<p>--------------------------------</p>
+<h1> comments </h1>
 <p>=====================</p>
 
+<% @num = 0 %>
 <% @comments.each do |comment| %>
   <div>
-    <% if comment.content != nil %>
-      <p></p>
-      <p> From: <%= comment.user.username %> </p>
-      <%= comment.content %>
+    <% if comment.content == nil %>
+      <% comment.delete %>
+    <% end %>
+    <p></p>
+    <h4> From: <%= comment.user.username %> </h4>
+    <%= comment.content %>
+    <% if comment && comment.user == current_user %>
+      <form method="post" action="/comments/<%=comment.id%>/delete">
+        <input id="hidden" type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete your comment">
+      </form>
       <p>---------------</p>
-      <% if comment && comment.user == current_user %>
-        <form method="post" action="/comments/<%=comment.id%>/delete">
-          <input id="hidden" type="hidden" name="_method" value="DELETE">
-          <input type="submit" value="Delete comment">
-        </form>
-      <% end %>
     <% end %>
   </div>
+  <% @num = @num + 1  %>
 <% end %>
+<p>There are <%= @num %> comment(s)</p>
 
 <p>=====================</p>
 <a href="/comments/new">
