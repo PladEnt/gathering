@@ -5,5 +5,6 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 run ApplicationController
+use PagesController
 use CommentsController
 use UsersController
