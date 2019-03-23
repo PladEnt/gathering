@@ -1,1 +1,19 @@
-<h1>This is the Model's index page.</h1>
+<% @num = 0 %>
+<% if @page == nil %>
+    <% @pages.each do |page| %>
+        <%= page.title %>
+        <p>By: <%= page.user.username %>
+        <form action="/pages/<%= page.id %>" method="get">
+        <input type="submit" value="Go to page">
+        </form>
+        <p>-------------------</p>
+        <% @num = @num + 1  %>
+    <% end %>
+<% end %>
+<p>There are <%= @num %> page(s)</p>
+<p>-------------------</p>
+<p>Make a new page</p>
+<form action="/pages" method="POST">
+  <p>Page name:<input type="text" name="title"></p>
+  <input class="btn btn-primary" type="submit">
+</form>

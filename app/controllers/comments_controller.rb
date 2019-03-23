@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
         if @comment && @comment.user == current_user
           erb :'comments/edit_comments'
         else
-          redirect to '/comments'
+          redirect to "pages/#{@comment.page_id}"
         end
       else
         redirect to '/login'
@@ -68,7 +68,7 @@ class CommentsController < ApplicationController
               redirect to "/comments/#{@comment.id}/edit"
             end
           else 
-            redirect to '/comments'
+            redirect to "/pages/#{@comment.page_id}"
           end
         end
       else 
@@ -79,10 +79,11 @@ class CommentsController < ApplicationController
     post '/comments/:id/delete' do
       if logged_in?
         @comment = Comment.find_by_id(params[:id])
+        @page = Page.find_by_id(@comment.page_id)
         if @comment && @comment.user == current_user
           @comment.delete
         end
-        redirect to '/comments'
+        redirect to "/pages/#{@comment.page_id}"
       else
         redirect to '/login'
       end

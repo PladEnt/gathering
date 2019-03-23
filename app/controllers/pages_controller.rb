@@ -2,6 +2,7 @@ class PagesController < ApplicationController
 
   # GET: /pages
   get "/pages" do
+    @pages = Page.all
     erb :"/pages/index.html"
   end
 
@@ -12,12 +13,34 @@ class PagesController < ApplicationController
 
   # POST: /pages
   post "/pages" do
-    redirect "/pages"
+    if params[:title] == ""
+      redirect to '/pages/new'
+    else
+      @page = Page.new(:title => params[:title])
+      @page.user_id = current_user.id
+      @page.save
+      redirect to "/pages/#{@page.id}"
+    end
   end
 
   # GET: /pages/5
   get "/pages/:id" do
-    erb :"/pages/show.html"
+    if logged_in?
+      @page = Page.find_by_id(params[:id])
+      erb :"/pages/show.html"
+    else
+      redirect to '/login'
+    end
+  end
+
+  post "/pages/:id/comments" do
+    if logged_in?
+      @page = Page.find_by_id(params[:id])
+      @page.comments.create(user: current_user, content: params[:content])
+      redirect to "/pages/#{@page.id}"
+    else
+      redirect to '/login'
+    end
   end
 
   # GET: /pages/5/edit
@@ -31,7 +54,13 @@ class PagesController < ApplicationController
   end
 
   # DELETE: /pages/5/delete
-  delete "/pages/:id/delete" do
-    redirect "/pages"
+  post "/pages/:id/delete" do
+    if logged_in?
+      @page = Page.find_by_id(params[:id])
+      @page.delete
+      redirect to "/pages"
+    else
+      redirect to '/login'
+    end
   end
 end

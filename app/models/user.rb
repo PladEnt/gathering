@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many  :comments
-
+  has_many  :pages
 
   has_secure_password
 

@@ -1,1 +1,44 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1> <%= @page.title %> </h1>
+<h4>By: <%= @page.user.username %></h4>
+
+<form method="get" action="/pages">
+  <input type="submit" value="Back to page index">
+</form>
+<form method="post" action="/pages/<%=@page.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete this page">
+</form>
+<p>--------------------------------</p>
+<h3>Loged in as: <%= current_user.username %></h3>
+<p>=====================</p>
+
+<% @num = 0 %>
+<% @page.comments.each do |comment| %>
+  <div>
+    <% if comment.content == nil %>
+      <% comment.delete %>
+    <% end %>
+    <p></p>
+    <h4> From: <%= comment.user.username %> </h4>
+    <%= comment.content %>
+    <% if comment && comment.user == current_user %>
+      <br></br>
+      <form method="post" action="/comments/<%=comment.id%>/delete">
+        <input id="hidden" type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete your comment">
+      </form>
+    <% end %>
+    <p>---------------</p>
+  </div>
+  <% @num = @num + 1  %>
+<% end %>
+<p>There are <%= @num %> comment(s)</p>
+
+<p>=====================</p>
+
+<p>Leave a comment</p>
+<form action="/pages/<%= @page.id %>/comments" method="POST">
+  <textarea name="content"></textarea>
+  <br></br>
+  <input class="btn btn-primary" type="submit">
+</form>
