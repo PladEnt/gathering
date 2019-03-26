@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       if !logged_in?
         erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
       else
-        redirect to '/comments'
+        redirect to '/pages'
       end
     end
   
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
         @user.save
         session[:user_id] = @user.id
-        redirect to '/comments'
+        redirect to '/pages'
       end
     end
   
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       if !logged_in?
         erb :'/users/login'
       else
-        redirect '/comments'
+        redirect '/pages'
       end
     end
   
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       user = User.find_by(:username => params[:username])
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect "/comments"
+        redirect "/pages"
       else
         redirect to '/login'
       end

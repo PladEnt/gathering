@@ -1,17 +1,14 @@
 class PagesController < ApplicationController
 
-  # GET: /pages
   get "/pages" do
     @pages = Page.all
     erb :"/pages/index.html"
   end
 
-  # GET: /pages/new
   get "/pages/new" do
     erb :"/pages/new.html"
   end
 
-  # POST: /pages
   post "/pages" do
     if params[:title] == ""
       redirect to '/pages/new'
@@ -23,7 +20,6 @@ class PagesController < ApplicationController
     end
   end
 
-  # GET: /pages/5
   get "/pages/:id" do
     if logged_in?
       @page = Page.find_by_id(params[:id])
@@ -43,17 +39,14 @@ class PagesController < ApplicationController
     end
   end
 
-  # GET: /pages/5/edit
   get "/pages/:id/edit" do
     erb :"/pages/edit.html"
   end
 
-  # PATCH: /pages/5
   patch "/pages/:id" do
     redirect "/pages/:id"
   end
 
-  # DELETE: /pages/5/delete
   post "/pages/:id/delete" do
     if logged_in?
       @page = Page.find_by_id(params[:id])
