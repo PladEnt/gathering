@@ -1,1 +1,18 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<% if @page.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= @page.errors.count %> error(s) prohibited this page from being saved:</h2>
+ 
+    <ul>
+    <% @page.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<form action="/pages/<%= @page.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <p>courrent page name: </p>
+  <input type="text" name="title" value="<%= @page.title %>">  
+  <br></br>
+  <input class="btn btn-primary" type="submit">
+</form>

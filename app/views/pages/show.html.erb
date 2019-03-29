@@ -4,10 +4,18 @@
 <form method="get" action="/pages">
   <input type="submit" value="Back to page index">
 </form>
-<form method="post" action="/pages/<%=@page.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete this page">
-</form>
+<br></br>
+<% if @page.user == current_user %>
+  <form style="display:inline-block" method="get" action="/pages/<%= @page.id %>/edit">
+    <input type="submit" value="Edit page">
+  </form>
+
+  <form style="display:inline-block" method="post" action="/pages/<%=@page.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete this page">
+  </form>
+<% end %>
+
 <p>--------------------------------</p>
 <h3>Loged in as: <%= current_user.username %></h3>
 <p>=====================</p>

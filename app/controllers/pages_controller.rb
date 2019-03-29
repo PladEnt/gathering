@@ -40,17 +40,39 @@ class PagesController < ApplicationController
   end
 
   get "/pages/:id/edit" do
-    erb :"/pages/edit.html"
+    if logged_in?
+      @page = Page.find_by_id(params[:id])
+      erb :"/pages/edit.html"
+    else
+      redirect to '/login'
+    end
   end
 
-  patch "/pages/:id" do
-    redirect "/pages/:id"
+  post "/pages/:id" do
+    if logged_in?
+      @page = Page.find_by_id(params[:id])
+      if @page && @page.user == current_user
+        if @page.update(title: params[:title])
+          redirect to "/pages/#{@page.id}"
+        else 
+          erb :"/pages/edit.html"
+        end
+      else 
+        binding.pry
+
+        redirect to "/pages/#{@page.id}"
+      end
+    else 
+      redirect to '/login'
+    end
   end
 
   post "/pages/:id/delete" do
     if logged_in?
       @page = Page.find_by_id(params[:id])
-      @page.delete
+      if @page && @page.user == current_user
+        @page.delete
+      end
       redirect to "/pages"
     else
       redirect to '/login'
