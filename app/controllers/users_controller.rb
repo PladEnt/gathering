@@ -52,16 +52,4 @@ class UsersController < ApplicationController
         redirect to '/'
       end
     end
-
-    get "/delete/all" do
-      if logged_in?
-        @user = User.all
-        @page = Page.all
-        @user.delete
-        @page.delete
-        redirect to '/signup'
-      else
-        redirect to '/login'
-      end
-    end
   end
